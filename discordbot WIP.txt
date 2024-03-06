@@ -1,0 +1,26 @@
+import discord 
+import datetime
+from discord.ext import commands
+
+welcome_channel = 1118594111377789020
+
+bot = commands.Bot(command_prefix='.', intent=discord.Intents.default())
+
+@bot.event
+async def on_ready():
+   print("Bot is Online")
+
+
+@bot.event
+async def on_member_join(member):
+    channel = bot.get_channel(welcome_channel)
+    embed = discord.Embed(
+        description=f'A warm and friendly welcome to you **(member.mention)** 🥰 really happy to have you here 😄 thanks for your contribution. If you can spare a minute please check ⁠👮︱security-check , there are our rules and also options for how you can do „an extra mile“ if you wish so 🥰🧡 lets make this an awesome Xperience 🤭. ',
+        color=0xffbf00,
+        timestamp=datetime.datetime.now()
+    )
+    role = discord.utils.get(member.guild.roles, name='Member')
+    await member.add_roles(role)
+    await channel.send(embed=embed)
+        
+bot.run("MTIxMzAxMzU0ODYxMTkzMjE4MA.GcHSG9.02dUBieoXfh5_beIWS2mlMQzVCUqlRsgKG5ZWY")
